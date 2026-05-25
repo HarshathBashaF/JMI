@@ -4,6 +4,12 @@ import './index.css'
 import App from './App.jsx'
 import { JobProvider } from './context/JobContext.jsx'
 
+import ReactGA from "react-ga4";
+
+ReactGA.initialize("G-NGW4FN2E1F");
+
+ReactGA.send("pageview");
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <JobProvider>
