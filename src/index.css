@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+
+
+/* Prevent Responsive Shake
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+} */
