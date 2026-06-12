@@ -1,0 +1,176 @@
+[
+  {
+    "id": 1,
+    "category": "Setup",
+    "title": "Appium Session Created",
+    "description": "Verify Appium server connection and session initialization"
+  },
+  {
+    "id": 2,
+    "category": "Functional",
+    "title": "Navigate to App",
+    "description": "Load the application URL in the mobile browser"
+  },
+  {
+    "id": 10,
+    "category": "UI/UX",
+    "title": "Home Heading Display",
+    "description": "Verify the hero heading is visible on the home page"
+  },
+  {
+    "id": 11,
+    "category": "UI/UX",
+    "title": "Features Section",
+    "description": "Verify features section renders with all elements"
+  },
+  {
+    "id": 12,
+    "category": "UI/UX",
+    "title": "CTA Buttons Visible",
+    "description": "Verify call-to-action buttons are displayed and clickable"
+  },
+  {
+    "id": 20,
+    "category": "Functional",
+    "title": "Home to Dashboard Navigation",
+    "description": "Navigate from home page to dashboard using CTA button"
+  },
+  {
+    "id": 30,
+    "category": "UI/UX",
+    "title": "Navigation Bar Render",
+    "description": "Verify the navigation bar with all links is visible"
+  },
+  {
+    "id": 31,
+    "category": "UI/UX",
+    "title": "Dashboard Cards Display",
+    "description": "Verify dashboard cards and metrics are displayed"
+  },
+  {
+    "id": 40,
+    "category": "Functional",
+    "title": "Navigate to Jobs Page",
+    "description": "Navigate to the jobs listing page"
+  },
+  {
+    "id": 41,
+    "category": "UI/UX",
+    "title": "Search Input Visible",
+    "description": "Verify the search input field is visible on jobs page"
+  },
+  {
+    "id": 42,
+    "category": "Functional",
+    "title": "Job Search Query",
+    "description": "Enter search query and verify input handling"
+  },
+  {
+    "id": 43,
+    "category": "UI/UX",
+    "title": "Job Results Display",
+    "description": "Verify job cards are displayed after search"
+  },
+  {
+    "id": 44,
+    "category": "UI/UX",
+    "title": "Apply Buttons Visible",
+    "description": "Verify apply buttons are present on job cards"
+  },
+  {
+    "id": 45,
+    "category": "UI/UX",
+    "title": "Filters Available",
+    "description": "Verify filter controls are available on jobs page"
+  },
+  {
+    "id": 46,
+    "category": "Functional",
+    "title": "Clear Filters",
+    "description": "Test the clear/reset filters functionality"
+  },
+  {
+    "id": 47,
+    "category": "Validation",
+    "title": "Empty Search Results",
+    "description": "Verify empty state is shown when no jobs match search"
+  },
+  {
+    "id": 50,
+    "category": "Functional",
+    "title": "Navigate to Analytics",
+    "description": "Navigate to analytics page"
+  },
+  {
+    "id": 51,
+    "category": "UI/UX",
+    "title": "Charts Displayed",
+    "description": "Verify charts and graphs display on analytics page"
+  },
+  {
+    "id": 60,
+    "category": "UI/UX",
+    "title": "Mobile Viewport (375x667)",
+    "description": "Test layout on small mobile screen resolution"
+  },
+  {
+    "id": 61,
+    "category": "UI/UX",
+    "title": "Tablet Viewport (768x1024)",
+    "description": "Test layout on tablet screen resolution"
+  },
+  {
+    "id": 62,
+    "category": "UI/UX",
+    "title": "Desktop Viewport (1920x1080)",
+    "description": "Test layout on desktop screen resolution"
+  },
+  {
+    "id": 70,
+    "category": "Functional",
+    "title": "API Response Valid",
+    "description": "Verify backend API returns valid job data"
+  },
+  {
+    "id": 80,
+    "category": "Functional",
+    "title": "Form Input Clear",
+    "description": "Test clearing input field functionality"
+  },
+  {
+    "id": 81,
+    "category": "Functional",
+    "title": "Form Input Entry",
+    "description": "Test entering text into form fields"
+  },
+  {
+    "id": 90,
+    "category": "Accessibility",
+    "title": "Touch Targets Size",
+    "description": "Verify touch targets meet mobile accessibility standards"
+  },
+  {
+    "id": 91,
+    "category": "Accessibility",
+    "title": "Color Contrast",
+    "description": "Verify color contrast meets WCAG AA standards"
+  },
+  {
+    "id": 92,
+    "category": "Accessibility",
+    "title": "Text Readability",
+    "description": "Verify font sizes are readable on mobile"
+  },
+  {
+    "id": 100,
+    "category": "Functional",
+    "title": "Page Refresh Stability",
+    "description": "Verify app handles page refresh correctly"
+  },
+  {
+    "id": 101,
+    "category": "Functional",
+    "title": "Route Navigation Stability",
+    "description": "Verify client-side routing works smoothly"
+  }
+]
