@@ -98,9 +98,32 @@ async function run() {
   const capabilities = {
     platformName: process.env.ANDROID_PLATFORM_NAME || "Android",
     automationName: process.env.ANDROID_AUTOMATION_NAME || "UiAutomator2",
-    deviceName: process.env.ANDROID_DEVICE_NAME || "Android Emulator",
+    udid: process.env.ANDROID_DEVICE_UDID || "ZSPFVGOBQKMBBMVO",
     newCommandTimeout: 240,
+    'goog:chromeOptions': {
+      w3c: false,
+      androidPackage: 'com.android.chrome',
+    },
   };
+
+  // Support both native app and mobile browser
+  if (process.env.ANDROID_APP_APK) {
+    capabilities.app = process.env.ANDROID_APP_APK;
+  } else if (process.env.ANDROID_APP_PACKAGE && process.env.ANDROID_APP_ACTIVITY) {
+    capabilities.appPackage = process.env.ANDROID_APP_PACKAGE;
+    capabilities.appActivity = process.env.ANDROID_APP_ACTIVITY;
+  } else {
+    capabilities.browserName = process.env.ANDROID_BROWSER_NAME || "Chrome";
+  }
+  // Support both native app and mobile browser
+  if (process.env.ANDROID_APP_APK) {
+    capabilities.app = process.env.ANDROID_APP_APK;
+  } else if (process.env.ANDROID_APP_PACKAGE && process.env.ANDROID_APP_ACTIVITY) {
+    capabilities.appPackage = process.env.ANDROID_APP_PACKAGE;
+    capabilities.appActivity = process.env.ANDROID_APP_ACTIVITY;
+  } else {
+    capabilities.browserName = process.env.ANDROID_BROWSER_NAME || "Chrome";
+  }
 
   // Support both native app and mobile browser
   if (process.env.ANDROID_APP_APK) {

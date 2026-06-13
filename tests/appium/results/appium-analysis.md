@@ -1,6 +1,6 @@
 # Appium Mobile E2E Test Analysis Report
 
-**Generated:** 2026-06-12T09:08:49.422Z
+**Generated:** 2026-06-13T06:57:14.875Z
 
 ## Executive Summary
 
@@ -25,9 +25,9 @@
 ### Test ID: 999 - Test Execution Error
 - **Category:** Error
 - **Status:** FAIL
-- **Details:** [init({"platformName":"Android","automationName":"UiAutomator2","deviceName":"Android Emulator","newCommandTimeout":240,"browserName":"Chrome"})] The environment you requested was unavailable.
-The requested resource could not be found, or a request was received using an HTTP method that is not supported by the mapped resource
-- **Timestamp:** 2026-06-12T09:08:49.242Z
+- **Details:** [init({"platformName":"Android","automationName":"UiAutomator2","udid":"ZSPFVGOBQKMBBMVO","newCommandTimeout":240,"goog:chromeOptions":{"w3c":false,"androidPackage":"com.android.chrome"},"browserName":"Chrome"})] The environment you requested was unavailable.
+The requested resource could not be found, or a request was received using an HTTP method that is not supported by the mapped resource.
+- **Timestamp:** 2026-06-13T06:57:14.710Z
 
 ## 📊 Detailed Results
 
@@ -46,5 +46,5 @@ The requested resource could not be found, or a request was received using an HT
 
 - Test Framework: Appium
 - Target Platform: Android
-- Execution Date: 12/6/2026
-- Execution Time: 2:38:49 pm
+- Execution Date: 13/6/2026
+- Execution Time: 12:27:14 pm

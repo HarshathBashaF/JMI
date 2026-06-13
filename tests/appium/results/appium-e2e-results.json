@@ -4,7 +4,7 @@
     "category": "Error",
     "title": "Test Execution Error",
     "status": "FAIL",
-    "details": "[init({\"platformName\":\"Android\",\"automationName\":\"UiAutomator2\",\"deviceName\":\"Android Emulator\",\"newCommandTimeout\":240,\"browserName\":\"Chrome\"})] The environment you requested was unavailable.\nThe requested resource could not be found, or a request was received using an HTTP method that is not supported by the mapped resource",
-    "timestamp": "2026-06-12T09:08:49.242Z"
+    "details": "[init({\"platformName\":\"Android\",\"automationName\":\"UiAutomator2\",\"udid\":\"ZSPFVGOBQKMBBMVO\",\"newCommandTimeout\":240,\"goog:chromeOptions\":{\"w3c\":false,\"androidPackage\":\"com.android.chrome\"},\"browserName\":\"Chrome\"})] The environment you requested was unavailable.\nThe requested resource could not be found, or a request was received using an HTTP method that is not supported by the mapped resource.",
+    "timestamp": "2026-06-13T06:57:14.710Z"
   }
 ]
