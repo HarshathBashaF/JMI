@@ -265,7 +265,7 @@ const Home = ({ navigateToDashboard }) => {
             & Grow
           </motion.span>{" "}
           <br />
-          <motion.Span className="text-green-300" >Your Career</motion.Span>
+          <motion.span className="text-green-300" >Your Career</motion.span>
         </motion.h1>
 
         <motion.p

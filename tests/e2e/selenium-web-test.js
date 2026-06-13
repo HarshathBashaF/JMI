@@ -88,6 +88,9 @@ async function run() {
     "goog:chromeOptions": {
       args: [
         !openUi ? "--headless=new" : null,
+        process.env.CI === "true" ? "--no-sandbox" : null,
+        process.env.CI === "true" ? "--disable-dev-shm-usage" : null,
+        process.env.CI === "true" ? "--disable-gpu" : null,
       ].filter(Boolean),
     },
   };
