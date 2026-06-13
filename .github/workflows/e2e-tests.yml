@@ -1,0 +1,108 @@
+name: E2E Tests & Report Generation
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build application
+        run: pnpm run build
+
+      - name: Run Unit Tests
+        run: pnpm run test:unit
+        continue-on-error: true
+
+      - name: Run Selenium E2E Tests
+        run: pnpm run test:selenium:ci
+        continue-on-error: true
+
+      - name: Generate Test Report
+        run: pnpm run test:report
+        continue-on-error: true
+
+      - name: Upload Selenium Report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: selenium-test-report
+          path: tests/report/selenium-test-results.xlsx
+          retention-days: 30
+
+      - name: Upload Test Results (JSON)
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: test-results-json
+          path: tests/report/
+          retention-days: 30
+
+      - name: Comment PR with Test Results
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            let comment = '## 📊 E2E Test Results\n\n';
+            const reportPath = path.join(process.env.GITHUB_WORKSPACE, 'tests/report/');
+            if (fs.existsSync(reportPath)) {
+              comment += '✅ Reports generated successfully!\n\n';
+              comment += '### 📁 Download Artifacts\n';
+              comment += '- **Selenium Test Report** (Excel file with detailed results)\n';
+              comment += '- **Test Results** (JSON format for analysis)\n';
+              comment += '\nArtifacts are available in the Actions run page.\n';
+            } else {
+              comment += '⚠️ Test reports not found\n';
+            }
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
