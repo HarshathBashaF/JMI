@@ -157,6 +157,13 @@ async function run() {
       record(18, "Functional", "Jobs route", "FAIL", e.message);
     }
 
+    // Wait for jobs to load from API (up to 90 seconds due to Render cold start)
+    console.log("Waiting for jobs to load from API (Render cold start)...");
+    await driver.wait(async () => {
+      const initialJobs = await driver.findElements(By.css("div[class*='group']"));
+      return initialJobs.length > 0;
+    }, 90000).catch(() => console.log("Warning: Initial jobs did not load within 90s"));
+
     // Jobs page tests
     await driver.wait(until.elementLocated(By.css("input[placeholder='Search jobs, skills...']")), 8000);
     const search = await driver.findElements(By.css("input[placeholder='Search jobs, skills...']"));
@@ -285,6 +292,9 @@ async function run() {
       try { localServer.kill(); } catch {}
     }
     await writeWorkbook();
+    const failCount = results.filter(r => r.status === "FAIL" || r.status === "PARTIAL").length;
+    console.log(`Process complete. Failed tests count: ${failCount}`);
+    process.exit(failCount > 0 ? 1 : 0);
   }
 }
 

@@ -48,7 +48,7 @@ const Analytics = () => {
             <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl shadow">
               <p className="text-sm text-gray-500">Real Data</p>
               <h2 className="text-2xl font-bold text-green-600">
-              <h1>Live</h1>
+                Live
               </h2>
             </div>
 
