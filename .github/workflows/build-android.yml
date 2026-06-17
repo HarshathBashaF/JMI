@@ -53,5 +53,5 @@ jobs:
       - name: Upload Test Report
         uses: actions/upload-artifact@v4
         with:
-          name: see-secrity-test-appium
-          path: "test cases/see secrity test_appium.xlsx"
+          name: see-secrity-test-Selenium
+          path: "test cases/see secrity test_Selenium.xlsx"
