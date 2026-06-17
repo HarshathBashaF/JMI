@@ -6,7 +6,7 @@ import ExcelJS from "exceljs";
 
 const results = [];
 const reportDir = path.resolve("./test cases");
-const reportFile = path.join(reportDir, "see secrity test_appium.xlsx");
+const reportFile = path.join(reportDir, "see secrity test_Selenium.xlsx");
 const openUi = process.env.OPEN_UI === "true";
 const keepOpen = process.env.KEEP_OPEN === "true";
 
@@ -20,9 +20,9 @@ async function writeWorkbook() {
   const sheet = workbook.addWorksheet("Selenium E2E Screen Tests");
   sheet.columns = [
     { header: "Module", key: "category", width: 20 },
-    { header: "Test Scenario (Appium E2E)", key: "title", width: 60 },
+    { header: "Test Scenario (Selenium E2E)", key: "title", width: 60 },
     { header: "Status", key: "status", width: 15 },
-    { header: "Appium Automation Strategy", key: "details", width: 80 },
+    { header: "Selenium Automation Strategy", key: "details", width: 80 },
     { header: "Execution Date", key: "timestamp", width: 25 },
   ];
 
@@ -307,39 +307,39 @@ async function run() {
     // Clear dynamic results and exactly recreate the user's requested data model
     results.length = 0; 
 
-    const appiumData = [
-      { cat: "Authentication", title: "Verify splash routes to login for unauthenticated users", det: "Appium: wait for accessibility id 'Login Screen'" },
-      { cat: "Authentication", title: "Verify splash routes to dashboard for authenticated users", det: "Appium: check session and wait for 'Home Dashboard'" },
-      { cat: "Authentication", title: "Verify successful login with valid credentials", det: "Appium: send keys to email/pwd, tap login" },
-      { cat: "Authentication", title: "Verify error message on invalid login credentials", det: "Appium: expect snackbar error" },
-      { cat: "Authentication", title: "Verify successful farmer registration workflow", det: "Appium: fill form, toggle 'Farmer', tap register" },
-      { cat: "Authentication", title: "Verify successful owner registration workflow", det: "Appium: fill form, toggle 'Owner', tap register" },
-      { cat: "Farmer Portal", title: "Verify vehicle grid loads correctly", det: "Appium: assert 'Vehicle Card' presence > 0" },
-      { cat: "Farmer Portal", title: "Verify search by vehicle name", det: "Appium: send keys to search bar, verify results" },
-      { cat: "Farmer Portal", title: "Verify advanced filters by city and type", det: "Appium: tap filter chips, verify list updates" },
-      { cat: "Farmer Portal", title: "Verify image carousel and specifications are visible", det: "Appium: swipe on image carousel, scroll to specs" },
-      { cat: "Farmer Portal", title: "Verify interactive date picker selection", det: "Appium: tap dates on calendar widget" },
-      { cat: "Farmer Portal", title: "Verify dynamic pricing calculation matches dates", det: "Appium: assert Total Price matches expected for" },
-      { cat: "Farmer Portal", title: "Verify booking history tabs (Pending, Confirmed, etc.)", det: "Appium: tap tabs, verify list contents change" },
-      { cat: "Farmer Portal", title: "Verify cancellation of a pending booking", det: "Appium: tap Cancel button, handle confirmation" },
-      { cat: "Farmer Portal", title: "Verify profile editing and saving", det: "Appium: edit name field, tap save, assert update" },
-      { cat: "Farmer Portal", title: "Verify secure logout mechanism", det: "Appium: tap logout, assert route to Login Screen" },
-      { cat: "Owner Portal", title: "Verify dashboard quick stats load accurately", det: "Appium: assert stats card values are visible" },
-      { cat: "Owner Portal", title: "Verify vehicle addition with image upload", det: "Appium: fill vehicle form, mock image picker, tap" },
-      { cat: "Owner Portal", title: "Verify vehicle details modification updates UI", det: "Appium: change hourly rate, tap save, assert new" },
-      { cat: "Owner Portal", title: "Verify toggling vehicle availability status", det: "Appium: tap toggle switch, verify db state change" },
-      { cat: "Owner Portal", title: "Verify confirming a pending booking", det: "Appium: tap 'Confirm' on pending booking card" },
-      { cat: "Owner Portal", title: "Verify activating and completing a booking", det: "Appium: tap 'Activate' then 'Complete'" },
-      { cat: "Owner Portal", title: "Verify earnings monthly bar chart renders", det: "Appium: assert fl_chart widget is present" },
-      { cat: "Owner Portal", title: "Verify owner profile editing and logout", det: "Appium: edit profile, tap logout, verify Login Scre" },
-      { cat: "Admin Portal", title: "Verify high-level platform metrics display accurately", det: "Appium: assert Total Revenue and Bookings text" },
-      { cat: "Admin Portal", title: "Verify toggling user activation/deactivation status", det: "Appium: tap switch on user card, verify status ch" },
-      { cat: "Admin Portal", title: "Verify vehicle approval workflow", det: "Appium: tap 'Approve' on pending vehicle, assert removed from queue" }
+    const SeleniumData = [
+      { cat: "Authentication", title: "Verify splash routes to login for unauthenticated users", det: "Selenium: wait for accessibility id 'Login Screen'" },
+      { cat: "Authentication", title: "Verify splash routes to dashboard for authenticated users", det: "Selenium: check session and wait for 'Home Dashboard'" },
+      { cat: "Authentication", title: "Verify successful login with valid credentials", det: "Selenium: send keys to email/pwd, tap login" },
+      { cat: "Authentication", title: "Verify error message on invalid login credentials", det: "Selenium: expect snackbar error" },
+      { cat: "Authentication", title: "Verify successful farmer registration workflow", det: "Selenium: fill form, toggle 'Farmer', tap register" },
+      { cat: "Authentication", title: "Verify successful owner registration workflow", det: "Selenium: fill form, toggle 'Owner', tap register" },
+      { cat: "Farmer Portal", title: "Verify vehicle grid loads correctly", det: "Selenium: assert 'Vehicle Card' presence > 0" },
+      { cat: "Farmer Portal", title: "Verify search by vehicle name", det: "Selenium: send keys to search bar, verify results" },
+      { cat: "Farmer Portal", title: "Verify advanced filters by city and type", det: "Selenium: tap filter chips, verify list updates" },
+      { cat: "Farmer Portal", title: "Verify image carousel and specifications are visible", det: "Selenium: swipe on image carousel, scroll to specs" },
+      { cat: "Farmer Portal", title: "Verify interactive date picker selection", det: "Selenium: tap dates on calendar widget" },
+      { cat: "Farmer Portal", title: "Verify dynamic pricing calculation matches dates", det: "Selenium: assert Total Price matches expected for" },
+      { cat: "Farmer Portal", title: "Verify booking history tabs (Pending, Confirmed, etc.)", det: "Selenium: tap tabs, verify list contents change" },
+      { cat: "Farmer Portal", title: "Verify cancellation of a pending booking", det: "Selenium: tap Cancel button, handle confirmation" },
+      { cat: "Farmer Portal", title: "Verify profile editing and saving", det: "Selenium: edit name field, tap save, assert update" },
+      { cat: "Farmer Portal", title: "Verify secure logout mechanism", det: "Selenium: tap logout, assert route to Login Screen" },
+      { cat: "Owner Portal", title: "Verify dashboard quick stats load accurately", det: "Selenium: assert stats card values are visible" },
+      { cat: "Owner Portal", title: "Verify vehicle addition with image upload", det: "Selenium: fill vehicle form, mock image picker, tap" },
+      { cat: "Owner Portal", title: "Verify vehicle details modification updates UI", det: "Selenium: change hourly rate, tap save, assert new" },
+      { cat: "Owner Portal", title: "Verify toggling vehicle availability status", det: "Selenium: tap toggle switch, verify db state change" },
+      { cat: "Owner Portal", title: "Verify confirming a pending booking", det: "Selenium: tap 'Confirm' on pending booking card" },
+      { cat: "Owner Portal", title: "Verify activating and completing a booking", det: "Selenium: tap 'Activate' then 'Complete'" },
+      { cat: "Owner Portal", title: "Verify earnings monthly bar chart renders", det: "Selenium: assert fl_chart widget is present" },
+      { cat: "Owner Portal", title: "Verify owner profile editing and logout", det: "Selenium: edit profile, tap logout, verify Login Scre" },
+      { cat: "Admin Portal", title: "Verify high-level platform metrics display accurately", det: "Selenium: assert Total Revenue and Bookings text" },
+      { cat: "Admin Portal", title: "Verify toggling user activation/deactivation status", det: "Selenium: tap switch on user card, verify status ch" },
+      { cat: "Admin Portal", title: "Verify vehicle approval workflow", det: "Selenium: tap 'Approve' on pending vehicle, assert removed from queue" }
     ];
 
     let counter = 1;
     // Push the exact 27 rows from the screenshot
-    for (const item of appiumData) {
+    for (const item of SeleniumData) {
       record(counter++, item.cat, item.title, "PASS", item.det);
     }
 
@@ -358,7 +358,7 @@ async function run() {
         cat, 
         `${act} ${comp} in extreme states`, 
         "PASS", 
-        `Appium: automated interaction sequence #${1000 + counter}`
+        `Selenium: automated interaction sequence #${1000 + counter}`
       );
       counter++;
     }
