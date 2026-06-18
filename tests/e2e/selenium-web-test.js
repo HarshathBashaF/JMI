@@ -38,15 +38,30 @@ async function writeWorkbook() {
       color: { argb: 'FFFFFFFF' },
       bold: true
     };
+    cell.border = {
+      top: { style: 'thin' },
+      left: { style: 'thin' },
+      bottom: { style: 'thin' },
+      right: { style: 'thin' }
+    };
   });
 
   results.forEach(row => {
-    sheet.addRow({
+    const excelRow = sheet.addRow({
       category: row.category,
       title: row.title,
       status: row.status === "PASS" ? "Passed" : row.status,
       details: row.details,
       timestamp: row.timestamp.replace("T", " ").substring(0, 19)
+    });
+    
+    excelRow.eachCell((cell) => {
+      cell.border = {
+        top: { style: 'thin' },
+        left: { style: 'thin' },
+        bottom: { style: 'thin' },
+        right: { style: 'thin' }
+      };
     });
   });
   

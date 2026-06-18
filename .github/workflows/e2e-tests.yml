@@ -69,7 +69,9 @@ jobs:
         if: always()
         with:
           name: selenium-test-report
-          path: tests/report/selenium-test-results.xlsx
+          path: |
+            tests/report/selenium-test-results.xlsx
+            test cases/see secrity test_Selenium.xlsx
           retention-days: 30
 
       - name: Upload Combined Test Analysis Report
