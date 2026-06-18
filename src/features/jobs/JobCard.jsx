@@ -1,6 +1,21 @@
 import { MapPin, Briefcase, ExternalLink } from "lucide-react";
+import { supabase } from "../../lib/supabaseClient";
 
 const JobCard = ({ job }) => {
+  const handleApplyClick = async () => {
+    try {
+      const { error } = await supabase
+        .from('job_clicks')
+        .insert([{ 
+          job_id: job.id || crypto.randomUUID(), 
+          job_title: job.title 
+        }]);
+      if (error) console.error("Error tracking click:", error);
+    } catch (err) {
+      console.error("Error tracking click:", err);
+    }
+  };
+
   return (
     <div className="group relative p-5 rounded-2xl bg-gradient-to-br from-black to-gray-900 border border-green-500/20 hover:border-green-400/40 transition-all duration-300 shadow-lg hover:shadow-green-500/10 hover:-translate-y-1">
 
@@ -46,6 +61,7 @@ const JobCard = ({ job }) => {
           href={job.url}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={handleApplyClick}
           className="flex items-center gap-2 px-4 py-2 rounded-lg bg-green-500 hover:bg-green-600 text-white text-sm font-medium transition shadow-md hover:shadow-green-500/30"
         >
           Apply
