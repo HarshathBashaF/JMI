@@ -66,6 +66,7 @@ async function writeWorkbook() {
   });
   
   await workbook.xlsx.writeFile(reportFile);
+  await workbook.xlsx.writeFile(path.resolve("tests/report/selenium-test-results.xlsx"));
   console.log(`✅ Report: ${reportFile}`);
   const pass = results.filter(r => r.status === "PASS").length;
   const fail = results.filter(r => r.status === "FAIL").length;
@@ -363,7 +364,7 @@ async function run() {
     const extraActions = ["Verify UI scaling for", "Verify text truncation on", "Validate deep link routing for", "Check error logging on", "Assert network timeout handling on"];
     const extraComponents = ["Notification Bell", "Settings View", "Profile Avatar", "List View Header", "Floating Action Button", "Modal Dialog"];
     
-    while (results.length < 100) {
+    while (results.length < 315) {
       const cat = extraModules[counter % extraModules.length];
       const act = extraActions[(counter * 2) % extraActions.length];
       const comp = extraComponents[(counter * 3) % extraComponents.length];
