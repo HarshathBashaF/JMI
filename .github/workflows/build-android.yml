@@ -26,9 +26,11 @@ jobs:
           version: 8
 
       - name: Install Dependencies
+        working-directory: ./Frontend
         run: pnpm install
 
       - name: Build Web App
+        working-directory: ./Frontend
         run: pnpm run build
 
       - name: Setup Java
@@ -38,20 +40,21 @@ jobs:
           java-version: '17'
 
       - name: Sync Capacitor
+        working-directory: ./Frontend
         run: npx cap sync android
 
       - name: Build APK
-        working-directory: ./android
+        working-directory: ./Frontend/android
         run: ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-debug.apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: Frontend/android/app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload Test Report
         uses: actions/upload-artifact@v4
         with:
           name: see-secrity-test-Selenium
-          path: "test cases/see secrity test_Selenium.xlsx"
+          path: "Frontend/test cases/see secrity test_Selenium.xlsx"
