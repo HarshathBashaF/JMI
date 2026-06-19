@@ -87,6 +87,14 @@ jobs:
           path: app/appium-e2e-results.xlsx
           retention-days: 30
 
+      - name: Upload Load Test Baseline Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: api-load-test-results
+          path: Frontend/tests/report/api-load-test-results.xlsx
+          retention-days: 30
+
       - name: Upload Combined Test Analysis Report
         uses: actions/upload-artifact@v4
         if: always()
@@ -118,6 +126,7 @@ jobs:
               comment += '### 📁 Download Artifacts\n';
               comment += '- **Selenium Test Report** (Excel file with detailed results)\n';
               comment += '- **Appium Test Report** (Mobile App results)\n';
+              comment += '- **Load Test Baseline Report** (API load test results)\n';
               comment += '- **Test Results** (JSON format for analysis)\n';
               comment += '\nArtifacts are available in the Actions run page.\n';
             } else {
