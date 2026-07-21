@@ -22,6 +22,7 @@ import com.jmi.app.presentation.ui.screens.AnalyticsScreen
 import com.jmi.app.presentation.ui.screens.DashboardScreen
 import com.jmi.app.presentation.ui.screens.HomeScreen
 import com.jmi.app.presentation.ui.screens.JobsScreen
+import com.jmi.app.presentation.ui.screens.ResumeScreen
 import kotlinx.coroutines.launch
 
 object Routes {
@@ -29,6 +30,7 @@ object Routes {
     const val DASHBOARD = "dashboard"
     const val JOBS = "jobs"
     const val ANALYTICS = "analytics"
+    const val RESUME = "resume"
 }
 
 @Composable
@@ -69,6 +71,10 @@ fun AppNavigation(
                 }
                 DrawerItem("Analytics", Icons.Default.Analytics, currentRoute == Routes.ANALYTICS) {
                     navController.navigate(Routes.ANALYTICS) { popUpTo(0) }
+                    scope.launch { drawerState.close() }
+                }
+                DrawerItem("Resume", Icons.Default.Description, currentRoute == Routes.RESUME) {
+                    navController.navigate(Routes.RESUME) { popUpTo(0) }
                     scope.launch { drawerState.close() }
                 }
 
@@ -122,6 +128,11 @@ fun AppNavigation(
             composable(Routes.ANALYTICS) {
                 AnalyticsScreen(
                     onBackClick = { navController.popBackStack() },
+                    onOpenDrawer = onOpenDrawer
+                )
+            }
+            composable(Routes.RESUME) {
+                ResumeScreen(
                     onOpenDrawer = onOpenDrawer
                 )
             }

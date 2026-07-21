@@ -77,6 +77,13 @@ class JobsViewModel @Inject constructor(
         _topLocations.value = locationCounts.toList().sortedByDescending { it.second }.take(10)
     }
 
+    private val _selectedResumeUri = MutableStateFlow<android.net.Uri?>(null)
+    val selectedResumeUri: StateFlow<android.net.Uri?> = _selectedResumeUri
+
+    fun onResumeSelected(uri: android.net.Uri?) {
+        _selectedResumeUri.value = uri
+    }
+
     fun onApplyClicked(job: Job) {
         viewModelScope.launch {
             try {

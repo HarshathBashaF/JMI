@@ -1,4 +1,4 @@
-import { Menu, Home, Briefcase, BarChart3 } from "lucide-react";
+import { Menu, Home, Briefcase, BarChart3, FileText } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -6,6 +6,7 @@ const navItems = [
   { name: "Dashboard", path: "/dashboard", icon: Home },
   { name: "Jobs", path: "/jobs", icon: Briefcase },
   { name: "Analytics", path: "/analytics", icon: BarChart3 },
+  { name: "Resume", path: "/resume", icon: FileText },
 ];
 
 const Navbar = ({ setOpen }) => {

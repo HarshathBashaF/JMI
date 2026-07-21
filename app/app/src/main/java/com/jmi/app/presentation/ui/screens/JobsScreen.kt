@@ -2,6 +2,8 @@ package com.jmi.app.presentation.ui.screens
 
 import android.content.Intent
 import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -28,11 +30,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jmi.app.data.model.Job
+import com.jmi.app.utils.ResumeUtils
 import com.jmi.app.presentation.ui.theme.*
 import com.jmi.app.presentation.viewmodels.JobsUiState
 import com.jmi.app.presentation.viewmodels.JobsViewModel
 
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.UploadFile
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,8 +45,23 @@ fun JobsScreen(
     onOpenDrawer: () -> Unit,
     viewModel: JobsViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsState()
+    val selectedResumeUri by viewModel.selectedResumeUri.collectAsState()
     var searchQuery by remember { mutableStateOf("") }
+
+    val filePickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        uri?.let {
+            viewModel.onResumeSelected(it)
+            val extractedText = ResumeUtils.extractTextFromPdf(context, it)
+            val skills = ResumeUtils.parseSkillsFromText(extractedText)
+            if (skills.isNotEmpty()) {
+                searchQuery = skills.joinToString(" ")
+            }
+        }
+    }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -94,10 +113,11 @@ fun JobsScreen(
                         onValueChange = { searchQuery = it },
                         placeholder = { Text("Search jobs, skills...", color = Gray500) },
                         leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search", tint = Gray500) },
-                        colors = TextFieldDefaults.outlinedTextFieldColors(
-                            containerColor = Color.White,
-                            unfocusedBorderColor = Color.Transparent,
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedContainerColor = Color.White,
+                            unfocusedContainerColor = Color.White,
                             focusedBorderColor = Color.Transparent,
+                            unfocusedBorderColor = Color.Transparent,
                             focusedTextColor = Gray800,
                             unfocusedTextColor = Gray800
                         ),
@@ -106,6 +126,31 @@ fun JobsScreen(
                         singleLine = true
                     )
                 }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Resume Upload Button - Moved outside the Box for better visibility
+            Button(
+                onClick = { filePickerLauncher.launch("application/pdf") },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (selectedResumeUri != null) Green500 else MaterialTheme.colorScheme.surfaceVariant,
+                    contentColor = if (selectedResumeUri != null) Color.White else MaterialTheme.colorScheme.onSurfaceVariant
+                ),
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier.fillMaxWidth(),
+                contentPadding = PaddingValues(12.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.UploadFile,
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = if (selectedResumeUri != null) "Resume Loaded" else "Scan Resume for Skills (PDF)",
+                    fontWeight = FontWeight.Bold
+                )
             }
 
             Spacer(modifier = Modifier.height(16.dp))
